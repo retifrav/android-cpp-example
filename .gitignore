@@ -2,14 +2,14 @@
 /android/.idea
 /android/app/build
 /android/captures
-/android/app/jni/libs
 
 /cpp/build
 /cpp/install
 
+*.cxx
+*.externalNativeBuild
+*.iml
+*.so
+
 .DS_Store
 local.properties
-
-*.cxx
-*.iml
-*.externalNativeBuild
