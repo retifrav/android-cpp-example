@@ -68,7 +68,11 @@ class MainActivity : ComponentActivity()
     companion object
     {
         init {
-            System.loadLibrary("Thingyd") // why the fuck does it need to be a part of the file name, what's the point then of declaring LOCAL_MODULE in Android.mk
+            // why the fuck does it need to be a part of the file name, what's the point then
+            // of declaring LOCAL_MODULE in Android.mk?
+            // and by the way, if you'll need to load a Debug variant (libThingyd.so),
+            // then the name here would need to be Thingyd
+            System.loadLibrary("Thingy")
         }
     }
 }
