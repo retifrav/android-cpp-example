@@ -1,5 +1,6 @@
 package com.example.some
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -26,10 +27,12 @@ import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -41,8 +44,10 @@ data class Gril(
     val photoID: Int
 )
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class MainActivity : ComponentActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContent {
             SomeTheme {
@@ -52,9 +57,18 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 )
                 {
-                    GrilsGallery(Grils.grilsData)
+                    GrilsGallery(Grils.grilsData, this::doThingy)
                 }
             }
+        }
+    }
+
+    private external fun doThingy(): String
+
+    companion object
+    {
+        init {
+            System.loadLibrary("Thingyd") // why the fuck does it need to be a part of the file name, what's the point then of declaring LOCAL_MODULE in Android.mk
         }
     }
 }
@@ -85,7 +99,8 @@ fun GrilCard(gril: Gril)
 
 @OptIn(ExperimentalMaterial3Api::class) // is there a fucking stable alternative?
 @Composable
-fun GrilsGallery(grils: List<Gril>) {
+fun GrilsGallery(grils: List<Gril>, doSomething: () -> String) // can also be () -> Unit, if it's a function without return value
+{
     Scaffold(
         topBar = {
             TopAppBar(
@@ -108,7 +123,10 @@ fun GrilsGallery(grils: List<Gril>) {
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 content = { Text("Do something") },
-                onClick = { Log.i("log", "ololo") }
+                onClick = {
+                    Log.i("log", "ololo");
+                    Log.i("log", doSomething());
+                }
             )
         },
         content = { padding ->
@@ -141,6 +159,10 @@ fun GrilsGallery(grils: List<Gril>) {
 @Composable
 fun GrilsGalleryPreview() {
     SomeTheme {
-        GrilsGallery(Grils.grilsData)
+        // don't know how to pass doThingy() function here,
+        // but apparently there is no need for that,
+        // given that this is just a static preview
+        GrilsGallery(Grils.grilsData, { "some string, doesn't matter" })
+        //GrilsGallery(Grils.grilsData, { /* and here can be some function, which also doesn't matter */ })
     }
 }

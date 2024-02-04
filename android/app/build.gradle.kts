@@ -14,6 +14,11 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        ndk {
+            abiFilters.clear() // is this required?
+            abiFilters.add("arm64-v8a")
+        }
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -41,6 +46,18 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            path = file("./jni/Android.mk")
+        }
+    }
+
+    sourceSets {
+        this.getByName("main") {
+            jniLibs.srcDirs("./jni/libs")
         }
     }
 }
