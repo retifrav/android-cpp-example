@@ -7,7 +7,7 @@
 namespace dpndnc
 {
     extern "C" JNIEXPORT jstring JNICALL
-    Java_com_example_some_MainActivity_doThingy(JNIEnv *env, jobject) // functions has to have this prefix
+    Java_com_example_some_MainActivity_doThingy(JNIEnv *env, jobject) // function has to have this prefix in order to be callable from Java side
     {
         std::stringstream someThing;
         someThing << "a string from C++: " << thingyString;

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -51,13 +52,16 @@ class MainActivity : ComponentActivity()
         super.onCreate(savedInstanceState)
         setContent {
             SomeTheme {
-                // a surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 )
                 {
-                    GrilsGallery(Grils.grilsData, this::doThingy)
+                    GrilsGallery(
+                        isSystemInDarkTheme(),
+                        Grils.grilsData,
+                        this::doThingy
+                    )
                 }
             }
         }
@@ -103,7 +107,11 @@ fun GrilCard(gril: Gril)
 
 @OptIn(ExperimentalMaterial3Api::class) // is there a fucking stable alternative?
 @Composable
-fun GrilsGallery(grils: List<Gril>, doSomething: () -> String) // can also be () -> Unit, if it's a function without return value
+fun GrilsGallery(
+    darkTheme: Boolean,
+    grils: List<Gril>,
+    doSomething: () -> String // can also be () -> Unit, if it's a function without return value
+)
 {
     Scaffold(
         topBar = {
@@ -119,7 +127,10 @@ fun GrilsGallery(grils: List<Gril>, doSomething: () -> String) // can also be ()
                     )
                 },
                 colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary
+                    containerColor = (
+                        if (darkTheme) MaterialTheme.colorScheme.surfaceVariant
+                        else MaterialTheme.colorScheme.surfaceTint
+                    )
                 )
             )
         },
@@ -166,7 +177,10 @@ fun GrilsGalleryPreview() {
         // don't know how to pass doThingy() function here,
         // but apparently there is no need for that,
         // given that this is just a static preview
-        GrilsGallery(Grils.grilsData, { "some string, doesn't matter" })
-        //GrilsGallery(Grils.grilsData, { /* and here can be some function, which also doesn't matter */ })
+        GrilsGallery(
+            isSystemInDarkTheme(),
+            Grils.grilsData,
+            { "some string, doesn't matter" }
+        )
     }
 }
