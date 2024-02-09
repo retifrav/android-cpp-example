@@ -19,6 +19,12 @@ android {
             abiFilters.add("arm64-v8a")
         }
 
+//        externalNativeBuild {
+//            cmake {
+//                arguments += "-DCMAKE_BUILD_TYPE=Release"
+//            }
+//        }
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -50,14 +56,9 @@ android {
     }
 
     externalNativeBuild {
-        ndkBuild {
-            path = file("./jni/Android.mk")
-        }
-    }
-
-    sourceSets {
-        this.getByName("main") {
-            jniLibs.srcDirs("./jni/libs")
+        cmake {
+            path = file("./src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
         }
     }
 }

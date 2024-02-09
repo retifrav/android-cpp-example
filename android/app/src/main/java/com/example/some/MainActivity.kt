@@ -72,11 +72,14 @@ class MainActivity : ComponentActivity()
     companion object
     {
         init {
-            // why the fuck does it need to be a part of the file name, what's the point then
-            // of declaring LOCAL_MODULE in Android.mk?
-            // and by the way, if you'll need to load a Debug variant (libThingyd.so),
-            // then the name here would need to be Thingyd
-            System.loadLibrary("Thingy")
+            // if you, like a normal person, defined CMAKE_DEBUG_POSTFIX (to `d` value),
+            // then this thing here will fail to find the `libcpp-wrapperd.so` file,
+            // so you'll need to:
+            // - either undefine CMAKE_DEBUG_POSTFIX;
+            // - or change the name here to a d-postfixed variant;
+            // - or hardcode your wrapper library build to `-DCMAKE_BUILD_TYPE=Release`,
+            // either in `build.gradle.kts` or in CMakeLists.txt
+            System.loadLibrary("cpp-wrapper")
         }
     }
 }
