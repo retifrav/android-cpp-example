@@ -60,14 +60,12 @@ class MainActivity : ComponentActivity()
                     GrilsGallery(
                         isSystemInDarkTheme(),
                         Grils.grilsData,
-                        this::doThingy
+                        this::doSomething
                     )
                 }
             }
         }
     }
-
-    private external fun doThingy(): String
 
     companion object
     {
@@ -81,6 +79,15 @@ class MainActivity : ComponentActivity()
             // either in `build.gradle.kts` or in CMakeLists.txt
             System.loadLibrary("cpp-wrapper")
         }
+    }
+
+    private external fun wrapperMessage(): String
+    private external fun doThingy(): String
+
+    private fun doSomething()
+    {
+        Log.i("log", wrapperMessage());
+        Log.i("log", doThingy());
     }
 }
 
@@ -113,7 +120,7 @@ fun GrilCard(gril: Gril)
 fun GrilsGallery(
     darkTheme: Boolean,
     grils: List<Gril>,
-    doSomething: () -> String // can also be () -> Unit, if it's a function without return value
+    doSomething: () -> Unit // can also be `() -> String` or some other type, if it's a function with a return value
 )
 {
     Scaffold(
@@ -143,7 +150,7 @@ fun GrilsGallery(
                 content = { Text("Do something") },
                 onClick = {
                     Log.i("log", "ololo");
-                    Log.i("log", doSomething());
+                    doSomething();
                 }
             )
         },

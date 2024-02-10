@@ -17,9 +17,14 @@ target_sources(${CMAKE_PROJECT_NAME}
         wrapper.cpp
 )
 
-# target_link_libraries(${CMAKE_PROJECT_NAME}
-#     PRIVATE
-#         # these might not be needed
-#         #android
-#         #log
-# )
+#set(CMAKE_FIND_DEBUG_MODE 1)
+find_package(Thingy CONFIG REQUIRED)
+#set(CMAKE_FIND_DEBUG_MODE 0)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    PRIVATE
+        some::Thingy
+        # these might not be needed
+        #android
+        #log
+)

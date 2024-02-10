@@ -1,16 +1,14 @@
 #include <sstream>
-#include <jni.h>
 
 #include <Thingy/thingy.h>
 #include "stuff.h"
 
 namespace dpndnc
 {
-    extern "C" JNIEXPORT jstring JNICALL
-    Java_com_example_some_MainActivity_doThingy(JNIEnv *env, jobject) // function has to have this prefix in order to be callable from Java side
+    std::string doThingy()
     {
         std::stringstream someThing;
         someThing << "a string from C++: " << thingyString;
-        return env->NewStringUTF(someThing.str().c_str());
+        return someThing.str();
     }
 }

@@ -19,11 +19,13 @@ android {
             abiFilters.add("arm64-v8a")
         }
 
-//        externalNativeBuild {
-//            cmake {
-//                arguments += "-DCMAKE_BUILD_TYPE=Release"
-//            }
-//        }
+        externalNativeBuild {
+            cmake {
+                arguments += "-DCMAKE_PREFIX_PATH=/PATH/TO/YOUR/EXTERNAL/PROJECT/install"
+                arguments += "-DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=\"BOTH\""
+                //arguments += "-DCMAKE_BUILD_TYPE=Release"
+            }
+        }
 
         vectorDrawables {
             useSupportLibrary = true
@@ -33,7 +35,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {

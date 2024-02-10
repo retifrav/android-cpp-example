@@ -1,9 +1,11 @@
 #ifndef THINGY_H
 #define THINGY_H
 
+#include <string>
+
 namespace dpndnc
 {
-    void doThingy();
+    std::string doThingy();
 }
 
 #endif // THINGY_H
