@@ -40,11 +40,6 @@ import androidx.compose.ui.unit.dp
 import com.example.some.ui.theme.Layout
 import com.example.some.ui.theme.SomeTheme
 
-data class Gril(
-    val name: String,
-    val photoID: Int
-)
-
 class MainActivity : ComponentActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?)
@@ -111,6 +106,12 @@ fun GrilCard(gril: Gril)
             Text(text = "Name:", fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(2.dp))
             Text(text = gril.name)
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(text = "Year:", fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(text = gril.year.toString())
         }
     }
 }
@@ -174,7 +175,9 @@ fun GrilsGallery(
 //        GrilCard(
 //            Gril(
 //                "Christina Hendricks",
-//                R.drawable.christina_hendricks
+//                1975,
+//                R.drawable.christina_hendricks,
+//                5
 //            )
 //        )
 //    }
