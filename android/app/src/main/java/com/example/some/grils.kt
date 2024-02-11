@@ -19,3 +19,29 @@ object Grils {
         Gril("Sydney Sweeney", 1997, R.drawable.sydney_sweeney, 4)
     )
 }
+
+// poor man's serializer
+fun grilsDataToJsonString(grils: List<Gril>): String
+{
+    val stringBuilder = StringBuilder();
+
+    stringBuilder.append("{\"grils\":[");
+    for (gril in grils)
+    {
+        stringBuilder.append("{");
+        stringBuilder.append("\"name\":\"");
+        stringBuilder.append(gril.name);
+        stringBuilder.append("\",");
+        stringBuilder.append("\"boobs\":");
+        stringBuilder.append(gril.boobsRating);
+        stringBuilder.append("}");
+        stringBuilder.append(",");
+    }
+    stringBuilder.delete(
+        stringBuilder.length - 1,
+        stringBuilder.length
+    );
+    stringBuilder.append("]}");
+
+    return stringBuilder.toString();
+}

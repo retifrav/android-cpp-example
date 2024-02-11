@@ -38,4 +38,10 @@ set(public_headers
     include/Thingy/thingy.h
 )
 
+find_package(jsoncpp CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+        JsonCpp::JsonCpp
+)
+
 include(Installing)

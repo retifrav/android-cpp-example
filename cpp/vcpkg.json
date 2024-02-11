@@ -1,0 +1,15 @@
+{
+    "name": "thingy",
+    "version": "0",
+    "dependencies":
+    [
+        "jsoncpp"
+    ],
+    "overrides":
+    [
+        {
+            "name": "jsoncpp",
+            "version": "1.9.5"
+        }
+    ]
+}

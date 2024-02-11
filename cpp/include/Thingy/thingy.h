@@ -6,6 +6,7 @@
 namespace dpndnc
 {
     std::string doThingy();
+    std::string whoHasTheBestBoobs(std::string jsonString);
 }
 
 #endif // THINGY_H
