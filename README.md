@@ -1,8 +1,8 @@
 # Android C++ example
 
-An example of using a pre-build C++ library in Android application with Kotlin.
+An example of using a pre-built C++ library in Android application with Kotlin.
 
-More details in the [following article](https://decovar.dev/) (*not published yet*).
+More details in the [following article](https://decovar.dev/blog/2024/02/12/cpp-library-in-android-application/).
 
 <!-- MarkdownTOC -->
 
