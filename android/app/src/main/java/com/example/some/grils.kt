@@ -15,6 +15,8 @@ object Grils {
         Gril("Christina Hendricks", 1975, R.drawable.christina_hendricks, 5),
         Gril("Elizabeth Olsen", 1989, R.drawable.elizabeth_olsen, 3),
         Gril("Gina Carano", 1982, R.drawable.gina_carano, 3),
+        Gril("Kate Beckinsale", 1973, R.drawable.kate_beckinsale, 2),
+        Gril("Morena Baccarin", 1979, R.drawable.morena_baccarin, 3),
         Gril("Scarlett Johansson", 1984, R.drawable.scarlett_johansson, 4),
         Gril("Sydney Sweeney", 1997, R.drawable.sydney_sweeney, 4)
     )
